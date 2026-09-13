@@ -44,13 +44,18 @@
             y = new DataGridViewTextBoxColumn();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             button1 = new Button();
+            menuStrip1 = new MenuStrip();
+            масивиToolStripMenuItem = new ToolStripMenuItem();
+            одновимірнийМасивToolStripMenuItem = new ToolStripMenuItem();
+            двовимірнийМасивToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(24, 39);
+            textBox1.Location = new Point(24, 57);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(60, 23);
             textBox1.TabIndex = 1;
@@ -58,7 +63,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(107, 39);
+            textBox2.Location = new Point(107, 57);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(60, 23);
             textBox2.TabIndex = 2;
@@ -67,7 +72,7 @@
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(189, 39);
+            textBox3.Location = new Point(189, 57);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(60, 23);
             textBox3.TabIndex = 3;
@@ -75,7 +80,7 @@
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(273, 39);
+            textBox4.Location = new Point(273, 57);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(60, 23);
             textBox4.TabIndex = 4;
@@ -85,7 +90,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(45, 23);
+            label1.Location = new Point(45, 41);
             label1.Name = "label1";
             label1.Size = new Size(21, 15);
             label1.TabIndex = 5;
@@ -95,16 +100,17 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(129, 23);
+            label2.Location = new Point(129, 41);
             label2.Name = "label2";
             label2.Size = new Size(20, 15);
             label2.TabIndex = 6;
             label2.Text = "Xk";
+            label2.Click += label2_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(211, 23);
+            label3.Location = new Point(211, 41);
             label3.Name = "label3";
             label3.Size = new Size(14, 15);
             label3.TabIndex = 7;
@@ -114,7 +120,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(295, 23);
+            label4.Location = new Point(295, 41);
             label4.Name = "label4";
             label4.Size = new Size(13, 15);
             label4.TabIndex = 8;
@@ -125,7 +131,7 @@
             dataGridView1.BackgroundColor = SystemColors.ControlLight;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { x, y });
-            dataGridView1.Location = new Point(25, 68);
+            dataGridView1.Location = new Point(24, 97);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(263, 286);
             dataGridView1.TabIndex = 9;
@@ -147,7 +153,7 @@
             chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             chart1.Legends.Add(legend1);
-            chart1.Location = new Point(309, 68);
+            chart1.Location = new Point(308, 97);
             chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -161,20 +167,51 @@
             // button1
             // 
             button1.BackColor = Color.Plum;
-            button1.Location = new Point(358, 23);
+            button1.Font = new Font("Segoe UI", 14F);
+            button1.Location = new Point(500, 41);
             button1.Name = "button1";
-            button1.Size = new Size(102, 39);
+            button1.Size = new Size(146, 39);
             button1.TabIndex = 11;
             button1.Text = "Розрахунок";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { масивиToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.TabIndex = 12;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // масивиToolStripMenuItem
+            // 
+            масивиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { одновимірнийМасивToolStripMenuItem, двовимірнийМасивToolStripMenuItem });
+            масивиToolStripMenuItem.Name = "масивиToolStripMenuItem";
+            масивиToolStripMenuItem.Size = new Size(62, 20);
+            масивиToolStripMenuItem.Text = "Масиви";
+            // 
+            // одновимірнийМасивToolStripMenuItem
+            // 
+            одновимірнийМасивToolStripMenuItem.Name = "одновимірнийМасивToolStripMenuItem";
+            одновимірнийМасивToolStripMenuItem.Size = new Size(193, 22);
+            одновимірнийМасивToolStripMenuItem.Text = "Одновимірний масив";
+            одновимірнийМасивToolStripMenuItem.Click += одновимірнийМасивToolStripMenuItem_Click;
+            // 
+            // двовимірнийМасивToolStripMenuItem
+            // 
+            двовимірнийМасивToolStripMenuItem.Name = "двовимірнийМасивToolStripMenuItem";
+            двовимірнийМасивToolStripMenuItem.Size = new Size(193, 22);
+            двовимірнийМасивToolStripMenuItem.Text = "Двовимірний масив";
+            двовимірнийМасивToolStripMenuItem.Click += двовимірнийМасивToolStripMenuItem_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PaleGreen;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 397);
             Controls.Add(button1);
             Controls.Add(chart1);
             Controls.Add(dataGridView1);
@@ -186,12 +223,16 @@
             Controls.Add(textBox3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Name = "Form1";
             RightToLeftLayout = true;
             Text = "Лабораторна робота 1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -210,5 +251,9 @@
         private Button button1;
         private DataGridViewTextBoxColumn x;
         private DataGridViewTextBoxColumn y;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem масивиToolStripMenuItem;
+        private ToolStripMenuItem одновимірнийМасивToolStripMenuItem;
+        private ToolStripMenuItem двовимірнийМасивToolStripMenuItem;
     }
 }
