@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -77,7 +78,10 @@ namespace lab1._1
                 for (int i = 0; i < sums.Length; i++)
                 {
                     label3.Text += $"Рядок {i + 1}: {sums[i]}\n";
+
                 }
+                label4.Text = twoDimArray.max().ToString();
+
             }
             catch (Exception ex)
             {

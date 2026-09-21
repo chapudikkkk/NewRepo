@@ -36,6 +36,7 @@
             label2 = new Label();
             dataGridView1 = new DataGridView();
             label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -116,11 +117,21 @@
             label3.Text = "Сума";
             label3.Click += label3_Click;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(740, 137);
+            label4.Name = "label4";
+            label4.Size = new Size(38, 15);
+            label4.TabIndex = 8;
+            label4.Text = "label4";
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(dataGridView1);
             Controls.Add(label2);
@@ -147,5 +158,6 @@
         private Label label2;
         private DataGridView dataGridView1;
         private Label label3;
+        private Label label4;
     }
 }

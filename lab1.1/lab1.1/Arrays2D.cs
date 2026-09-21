@@ -88,5 +88,23 @@ namespace lab1._1
             return rowSum;
         }
 
+        public int max()
+        {
+            int max = a[0, 0];
+            for (int i=0; i<x_length; i++)
+            {
+                for (int j = 0; j < y_length; j++) { 
+                
+                    if (a[i, j] > max)
+                    {
+                        max = a[i, j];
+                    }
+                }
+                
+
+            }
+            return max;
+        }
+
     }
 }
