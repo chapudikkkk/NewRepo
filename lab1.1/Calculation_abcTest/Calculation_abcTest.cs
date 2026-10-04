@@ -29,4 +29,19 @@ public class Calculation_abcTest
         Assert.AreEqual(testRes, res);
     }
 
+    [TestMethod]
+
+    public void CalculationSum()
+    {
+        var calc = new Calculation_abc(-1, -2, 5);
+
+        var testRes = 2;
+
+        var res = calc.Calculate();
+
+        Assert.AreEqual(testRes, res);
+    }
+
+
+
 }

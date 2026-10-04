@@ -1,0 +1,144 @@
+﻿<Window x:Class="lab3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Туристичне агентство" Height="640" Width="750"
+        Background="#F4F6F9" FontFamily="Segoe UI">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,15,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Margin" Value="0,3,0,3"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="0,3,0,0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,3,0,3"/>
+            <Setter Property="Padding" Value="4"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Параметри туру" Grid.Row="0">
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Тип туру:" Grid.Row="0" Grid.Column="0"/>
+                    <ComboBox x:Name="TourTypeComboBox" Grid.Row="0" Grid.Column="1" SelectionChanged="TourTypeComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Морський круїз"/>
+                        <ComboBoxItem Content="Екскурсійний тур"/>
+                    </ComboBox>
+
+                    <Label Content="Кількість осіб:" Grid.Row="1" Grid.Column="0"/>
+                    <ComboBox x:Name="PeopleCountComboBox" Grid.Row="1" Grid.Column="1">
+                        <ComboBoxItem Content="1 особа" Tag="1" IsSelected="True"/>
+                        <ComboBoxItem Content="2 особи" Tag="2"/>
+                        <ComboBoxItem Content="3 особи" Tag="3"/>
+                        <ComboBoxItem Content="4 особи" Tag="4"/>
+                        <ComboBoxItem Content="5 осіб" Tag="5"/>
+                        <ComboBoxItem Content="6 осіб" Tag="6"/>
+                        <ComboBoxItem Content="7 осіб" Tag="7"/>
+                        <ComboBoxItem Content="8 осіб" Tag="8"/>
+                    </ComboBox>
+
+                    <Label Content="Країна:" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox x:Name="CountryTextBox" Grid.Row="2" Grid.Column="1"/>
+
+                    <Label Content="Кількість днів:" Grid.Row="3" Grid.Column="0"/>
+                    <TextBox x:Name="DaysTextBox" Grid.Row="3" Grid.Column="1"/>
+
+                    <Label Content="Ціна за 1 особу (грн):" Grid.Row="4" Grid.Column="0"/>
+                    <TextBox x:Name="PriceTextBox" Grid.Row="4" Grid.Column="1"/>
+                </Grid>
+
+                <StackPanel x:Name="CruiseFields" Margin="0,5,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Назва корабля:" Grid.Column="0"/>
+                        <TextBox x:Name="ShipNameTextBox" Grid.Column="1"/>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel x:Name="SightseeingFields" Margin="0,5,0,0" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Кількість міст:" Grid.Column="0"/>
+                        <TextBox x:Name="CitiesCountTextBox" Grid.Column="1"/>
+                    </Grid>
+                </StackPanel>
+
+                <Button x:Name="BookTourButton" Content="Забронювати тур" Click="BookTourButton_Click"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Список заброньованих турів" Grid.Row="1">
+            <ListBox x:Name="ToursListBox"/>
+        </GroupBox>
+
+        <GroupBox Header="Аналітика" Grid.Row="2">
+            <Grid Margin="5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock Text="Загальна вартість турів:" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TotalToursCostTextBlock" Text="0.00 грн" FontSize="16" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock Text="Вартість харчування:" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TotalCateringTextBlock" Text="0.00 грн" FontSize="16" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

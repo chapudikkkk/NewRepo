@@ -12,7 +12,7 @@ namespace lab1.class_laba2
         public CircularSegment(double r, double l)
         {
             if (r <= 0 || l <= 0)
-                throw new ArgumentException("Радіус и хорда повинні бути додатними");
+                throw new ArgumentException("Радіус і хорда повинні бути додатними");
             if (l > 2 * r)
                 throw new ArgumentException("Хорда не може бути більшою за діаметр");
 

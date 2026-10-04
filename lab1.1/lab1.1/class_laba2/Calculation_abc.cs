@@ -42,10 +42,16 @@ namespace lab1.class_laba2
             {
                 return p;
             }
+            if ((a < 0 && b < 0)|| (a < 0 && c < 0) || (b < 0 && c < 0))
+            {
+                return a + b + c;
+            }
             else
             {
                 return p * p; 
             }
         }
+
+
     }
 }
