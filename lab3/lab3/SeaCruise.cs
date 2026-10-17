@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab3
 {
-    public class SeaCruise : TouristTour
+    public class SeaCruise : TouristTour, IFuelCalculation
     {
         private string shipName = "";
 
@@ -30,6 +30,7 @@ namespace lab3
 
         public double CalculateFuel()
         {
+
             return Days * 7800.0;
         }
 
@@ -39,8 +40,12 @@ namespace lab3
             var protocol = new StringBuilder();
             protocol.AppendLine(baseInfo);
             protocol.AppendLine($"Лайнер: \"{ShipName}\"");
-            protocol.AppendLine($"Витрати на паливо: {CalculateFuel():C}");
+            protocol.AppendLine($"Витрати на паливо: {CalculateFuel()}");
             return protocol.ToString();
+        }
+
+        public double CalculateTotal (){
+            return CalculateFuel()/ Days;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,7 +15,7 @@ namespace lab3
 {
     public partial class MainWindow : Window
     {
-        private List<TouristTour> _tours = new List<TouristTour>();
+        private List<ITour> _tours = new List<ITour>();
 
         public MainWindow()
         {
@@ -29,17 +31,27 @@ namespace lab3
 
         private void SetInitialUiState()
         {
-            if (CruiseFields == null || SightseeingFields == null) return;
+            if (CruiseFields == null || SightseeingFields == null || BusFields == null || HotelFields == null) return;
 
-            if (TourTypeComboBox.SelectedIndex == 0)
+            CruiseFields.Visibility = Visibility.Collapsed;
+            SightseeingFields.Visibility = Visibility.Collapsed;
+            BusFields.Visibility = Visibility.Collapsed;
+            HotelFields.Visibility = Visibility.Collapsed;
+
+            switch (TourTypeComboBox.SelectedIndex)
             {
-                CruiseFields.Visibility = Visibility.Visible;
-                SightseeingFields.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                CruiseFields.Visibility = Visibility.Collapsed;
-                SightseeingFields.Visibility = Visibility.Visible;
+                case 0: 
+                    CruiseFields.Visibility = Visibility.Visible;
+                    break;
+                case 1: 
+                    SightseeingFields.Visibility = Visibility.Visible;
+                    break;
+                case 2: 
+                    BusFields.Visibility = Visibility.Visible;
+                    break;
+                case 3: 
+                    HotelFields.Visibility = Visibility.Visible;
+                    break;
             }
         }
 
@@ -70,22 +82,36 @@ namespace lab3
                     }
                 }
 
-                TouristTour tour;
+                ITour tour;
+                int selectedIndex = TourTypeComboBox.SelectedIndex;
 
-                if (TourTypeComboBox.SelectedIndex == 0)
+                if (selectedIndex == 0) 
                 {
                     string shipName = ShipNameTextBox.Text;
                     tour = new SeaCruise(country, days, price, peopleCount, shipName);
                 }
-                else
+                else if (selectedIndex == 1) 
                 {
                     if (!int.TryParse(CitiesCountTextBox.Text, out int citiesCount))
                     {
                         MessageBox.Show("Будь ласка, введіть коректну кількість міст.", "Помилка введення", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-
                     tour = new SightseeingTour(country, days, price, peopleCount, citiesCount);
+                }
+                else if (selectedIndex == 2)
+                {
+                    if (!double.TryParse(RouteDistanceTextBox.Text, out double routeDistance))
+                    {
+                        MessageBox.Show("Будь ласка, введіть коректну дистанцію маршруту.", "Помилка введення", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    tour = new CityBusTour(country, days, price, peopleCount, routeDistance);
+                }
+                else
+                {
+                    string hotelName = HotelNameTextBox.Text;
+                    tour = new HotelBeachTour(country, days, price, peopleCount, hotelName);
                 }
 
                 _tours.Add(tour);
@@ -107,11 +133,18 @@ namespace lab3
 
         private void UpdateAnalytics()
         {
-            double totalToursCost = TourAnalysis.GetTotalToursCost(_tours);
+            double totalToursCost = 0;
+            foreach (var t in _tours)
+            {
+                totalToursCost += t.CalculateTotalPrice();
+            }
+
             double totalCatering = TourAnalysis.GetTotalCateringCost(_tours);
+            double totalFuel = TourAnalysis.GetTotalFuelExpenses(_tours);
 
             TotalToursCostTextBlock.Text = $"{totalToursCost:C}";
             TotalCateringTextBlock.Text = $"{totalCatering:C}";
+            TotalFuelTextBlock.Text = $"{totalFuel:C}";
         }
     }
 }

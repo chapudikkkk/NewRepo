@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
     namespace lab3
     {
-        public class SightseeingTour : TouristTour
+        public class SightseeingTour : TouristTour, ICateringCalculation
         {
             private int citiesCount;
 
@@ -31,7 +31,7 @@ using System.Threading.Tasks;
 
             public double CalculateCateringCost()
             {
-                return Days * CitiesCount * PeopleCount * 350.0;
+                return Days * CitiesCount * PeopleCount * 500.0;
             }
 
             public override string Book()
@@ -40,7 +40,7 @@ using System.Threading.Tasks;
                 var protocol = new StringBuilder();
                 protocol.AppendLine(baseInfo);
                 protocol.AppendLine($"Міст у програмі: {CitiesCount}");
-                protocol.AppendLine($"Вартість харчування на групу ({PeopleCount} осіб): {CalculateCateringCost():C}");
+                protocol.AppendLine($"Вартість харчування на групу ({PeopleCount} осіб): {CalculateCateringCost()}");
                 return protocol.ToString();
             }
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab3
 {
-    public abstract class TouristTour
+    public abstract class TouristTour : ITour
     {
         private string country = "";
         private int days;
