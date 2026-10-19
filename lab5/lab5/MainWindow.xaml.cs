@@ -65,7 +65,7 @@ namespace lab5
 
         private void SortButton_Click(object sender, RoutedEventArgs e)
         {
-            _catalog.SortByName();
+            _catalog.SortByBirthYear();
         }
 
         private void FilterButton_Click(object sender, RoutedEventArgs e)

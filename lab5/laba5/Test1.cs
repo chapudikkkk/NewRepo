@@ -67,7 +67,7 @@ namespace laba5
         {
             var student1 = new Student("Іваненко І.", 2003, 1, "#1");
             var student2 = new Student("Петренко П.", 2005, 2, "#2");
-            var comparer = new StudentFullNameComparer();
+            var comparer = new StudentBirthYearComparer();
             int result = comparer.Compare(student1, student2);
             Assert.IsTrue(result < 0, "Студент з меншим роком народження має йти першим.");
         }

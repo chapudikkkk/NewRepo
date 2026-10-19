@@ -49,18 +49,18 @@ public class StudentCatalogTests
     }
 
     [TestMethod]
-    public void SortByName_ShouldSortStudentsAlphabetically()
+    public void SortByName_ShouldSortStudentsByYear()
     {
         var catalog = new StudentCatalog(_fileSaver, _fileLoader, _testFilePath);
         catalog.AddStudent(new Student("Шевченко Тарас", 2004, 10, "#3"));
         catalog.AddStudent(new Student("Андрієнко Андрій", 2005, 15, "#1"));
         catalog.AddStudent(new Student("Бойко Богдан", 2006, 12, "#2"));
 
-        catalog.SortByName();
+        catalog.SortByBirthYear();
 
-        Assert.AreEqual("Андрієнко Андрій", catalog.Students[0].FullName);
-        Assert.AreEqual("Бойко Богдан", catalog.Students[1].FullName);
-        Assert.AreEqual("Шевченко Тарас", catalog.Students[2].FullName);
+        Assert.AreEqual(2004, catalog.Students[0].BirthYear);
+        Assert.AreEqual(2005, catalog.Students[1].BirthYear);
+        Assert.AreEqual(2006, catalog.Students[2].BirthYear);
     }
 
 
@@ -80,4 +80,21 @@ public class StudentCatalogTests
         Assert.AreEqual(15, catalog2.Students[0].School);
         Assert.AreEqual("#1", catalog2.Students[0].Id);
     }
+
+    [TestMethod]
+    public void MaxSchoolTest()
+    {
+        var catalog = new StudentCatalog(_fileSaver, _fileLoader, _testFilePath);
+        catalog.AddStudent(new Student("Шевченко Тарас", 2004, 1, "#3"));
+        catalog.AddStudent(new Student("Андрієнко Андрій", 2005, 1, "#1"));
+        catalog.AddStudent(new Student("Бойко Богдан", 2006, 1, "#2"));
+        catalog.AddStudent(new Student("Бой Богдана", 2003, 2, "#2"));
+
+
+        int resultSchool = catalog.MaxSchool();
+        Assert.AreEqual(1, resultSchool);
+    }
+
+
+
 }

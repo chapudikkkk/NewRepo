@@ -36,10 +36,10 @@ namespace lab5
             _allStudents.Remove(student);
         }
 
-        public void SortByName()
+        public void SortByBirthYear()
         {
             var sortedStudents = new List<Student>(Students);
-            sortedStudents.Sort(new StudentFullNameComparer());
+            sortedStudents.Sort(new StudentBirthYearComparer());
             UpdateVisibleCollection(sortedStudents);
         }
 
@@ -77,5 +77,34 @@ namespace lab5
                 UpdateVisibleCollection(_allStudents);
             }
         }
-    }
+
+
+        public int MaxSchool()
+        {
+            int maxSchool = Students[0].School;
+            int maxCount = 0;
+
+            foreach (var currentStudent in Students)
+            {
+                int currentSchool = currentStudent.School;
+                int count = 0;
+
+                foreach (var student in Students)
+                {
+                    if (student.School == currentSchool)
+                    {
+                        count++;
+                    }
+                }
+                if (count > maxCount)
+                {
+                    maxCount = count;
+                    maxSchool = currentSchool;
+                }
+            }
+
+            return maxSchool;
+        }
+    }   
+        
 }

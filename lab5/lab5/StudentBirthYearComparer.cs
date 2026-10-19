@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace lab5
 {
-    public class StudentFullNameComparer : IComparer<Student>
+    public class StudentBirthYearComparer : IComparer<Student>
     {
         public int Compare(Student? x, Student? y)
         {
@@ -15,7 +15,7 @@ namespace lab5
             {
                 return 0;
             }
-            return string.Compare(x.FullName, y.FullName, StringComparison.CurrentCultureIgnoreCase);
+            return x.BirthYear.CompareTo(y.BirthYear);
         }
     }
 
