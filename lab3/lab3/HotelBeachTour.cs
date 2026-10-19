@@ -43,4 +43,4 @@ namespace lab3
             return protocol.ToString();
         }
     }
-}
+}   

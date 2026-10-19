@@ -108,10 +108,26 @@ namespace TourAgency.Tests
         [TestMethod]
         public void HotelBeachTour_CateringCalculation()
         {
-            var hotelTour = new HotelBeachTour("Єгипет", 7, 12000, 2, "Hilton", 5);
+            var hotelTour = new HotelBeachTour("Єгипет", 7, 12000, 2, "Hilton");
             double cateringCost = hotelTour.CalculateCateringCost();
             //7 днів * 2 особи * 800 грн
             Assert.AreEqual(11200.0, cateringCost);
+        }
+
+
+
+        [TestMethod]
+        public void FindMinPrice()
+        {
+            List<ITour> tours = new List<ITour>
+        {
+        new SeaCruise("Греція", 10, 30000, 2, "Poseidon"),
+        new SightseeingTour("Німеччина", 4, 12000, 2, 2),
+        new SightseeingTour("Польща", 3, 8000, 3, 4)
+        };
+
+            double minPrice = TourAnalysis.GetMinPrice(tours);
+            Assert.AreEqual(24000.0, minPrice);
         }
 
     }

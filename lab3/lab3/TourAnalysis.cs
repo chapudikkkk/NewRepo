@@ -36,5 +36,26 @@ namespace lab3
 
             return totalFuel;
         }
+
+
+        public static double GetMinPrice(List<ITour> tours)
+        {
+            if (tours == null) return 0;
+            double minPrice = tours[0].CalculateTotalPrice();
+            foreach (var tour in tours)
+            {
+                double currentPrice = tour.CalculateTotalPrice();
+                if (currentPrice < minPrice)
+                {
+                    minPrice = currentPrice;
+                }
+            }
+
+            return minPrice;
+        }
+
+
+
+
     }
 }
