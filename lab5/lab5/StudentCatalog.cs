@@ -38,11 +38,11 @@ namespace lab5
 
         public void SortByBirthYear()
         {
-            var sortedStudents = new List<Student>(Students);
-            sortedStudents.Sort(new StudentBirthYearComparer());
+            var sortedStudents = _allStudents
+            .OrderBy(s => s.BirthYear)
+            .ToList();
             UpdateVisibleCollection(sortedStudents);
-        }
-
+        } 
         public void FilterByBirthYear(int year)
         {
             var filtered = _allStudents.Where(s => s.BirthYear > year).ToList();
@@ -62,6 +62,81 @@ namespace lab5
                 Students.Add(student);
             }
         }
+        public void SearchStudents(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                ResetFilter();
+                return;
+            }
+
+            var searchResult = _allStudents
+                .Where(s =>
+                    s.FullName.Contains(searchTerm,
+                        StringComparison.OrdinalIgnoreCase) ||
+                    s.Id.Contains(searchTerm,
+                        StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            UpdateVisibleCollection(searchResult);
+        }
+
+        public List<int> GetUniqueSchools()
+        {
+            var uniqueSchools = _allStudents
+                .Select(s => s.School)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToList();
+
+            return uniqueSchools;
+        }
+
+        public void FindThreeOldestStudents()
+        {
+            var oldestStudents = _allStudents
+                .OrderBy(s => s.BirthYear)
+                .ThenBy(s => s.FullName)
+                .Take(3)
+                .ToList();
+
+            UpdateVisibleCollection(oldestStudents);
+        }
+
+        public double CalculateAverageBirthYear()
+        {
+            if (_allStudents.Count == 0)
+            {
+                return 0;
+            }
+
+            return _allStudents.Average(s => s.BirthYear);
+        }
+
+        public string FindLongestFullName()
+        {
+            if (_allStudents.Count == 0)
+            {
+                return "Каталог порожній";
+            }
+
+            return _allStudents.OrderByDescending(s => s.FullName.Length).First().FullName;
+        }
+
+        public int MaxSchool()
+        {
+            if (_allStudents.Count == 0)
+            {
+                return 0;
+            }
+
+            return _allStudents
+                .GroupBy(s => s.School)
+                .OrderByDescending(g => g.Count())
+                .ThenBy(g => g.Key)
+                .First()
+                .Key;
+        }
 
         public async Task SaveAsync()
         {
@@ -70,40 +145,14 @@ namespace lab5
 
         public async Task LoadAsync()
         {
-            var loadedStudents = await _fileLoader.LoadAsync<Student>(_filePath);
+            var loadedStudents =
+                await _fileLoader.LoadAsync<Student>(_filePath);
+
             if (loadedStudents != null)
             {
                 _allStudents = loadedStudents;
                 UpdateVisibleCollection(_allStudents);
             }
-        }
-
-
-        public int MaxSchool()
-        {
-            int maxSchool = Students[0].School;
-            int maxCount = 0;
-
-            foreach (var currentStudent in Students)
-            {
-                int currentSchool = currentStudent.School;
-                int count = 0;
-
-                foreach (var student in Students)
-                {
-                    if (student.School == currentSchool)
-                    {
-                        count++;
-                    }
-                }
-                if (count > maxCount)
-                {
-                    maxCount = count;
-                    maxSchool = currentSchool;
-                }
-            }
-
-            return maxSchool;
         }
     }   
         

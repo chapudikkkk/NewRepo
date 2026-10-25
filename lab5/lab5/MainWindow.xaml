@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab5"
         mc:Ignorable="d"
-        Title="Каталог студентів" Height="500" Width="700" 
-        MinHeight="400" MinWidth="600"
+        Title="Каталог студентів" Height="560" Width="850"
+        MinHeight="500" MinWidth="800"
         Background="#F4F4F4">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -42,15 +43,7 @@
             </Grid>
         </GroupBox>
 
-        <DataGrid x:Name="StudentsDataGrid" Grid.Row="1" 
-                  AutoGenerateColumns="False" 
-                  CanUserAddRows="False"
-                  IsReadOnly="True"
-                  SelectionMode="Single"
-                  Margin="0,0,0,10"
-                  GridLinesVisibility="All"
-                  HorizontalGridLinesBrush="LightGray"
-                  VerticalGridLinesBrush="LightGray">
+        <DataGrid x:Name="StudentsDataGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" Margin="0,0,0,5" GridLinesVisibility="All" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ПІБ студента" Binding="{Binding FullName}" Width="2*"/>
                 <DataGridTextColumn Header="Рік народження" Binding="{Binding BirthYear}" Width="1*"/>
@@ -59,13 +52,24 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5" Background="#FFD700" Width="780">
+            <TextBlock Text="Пошук:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="SearchTextBox" Width="151" Margin="3" Padding="3"/>
+            <Button Content="Знайти" Margin="3" Click="SearchButton_Click" Width="77"/>
+            <Button Content="Unique Школи" Margin="3" Click="UniqueSchoolsButton_Click" Width="95"/>
+            <Button Content="3 найстарші" Margin="3" Click="OldestStudentsButton_Click" Width="91"/>
+            <Button Content="Середній рік" Margin="3" Click="AverageYearButton_Click" Width="87"/>
+            <Button Content="Найдовше ПІБ" Margin="3" Click="GroupStudentsButton_Click" Width="87"/>
+            <Button Content="Усі студенти" Margin="3" Click="ResetButton_Click" Width="98"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,0">
             <Button Content="Додати" Click="AddButton_Click" Width="80" Margin="5"/>
             <Button Content="Видалити" Click="DeleteButton_Click" Width="80" Margin="5"/>
             <Button Content="Сортувати" Click="SortButton_Click" Width="80" Margin="5"/>
             <Button Content="Фільтр" Click="FilterButton_Click" Width="80" Margin="5"/>
             <Button Content="Зберегти" Click="SaveButton_Click" Width="80" Margin="5"/>
-            <Button Content="Завантажити" Click="LoadButton_Click" Width="80" Margin="5"/>
+            <Button Content="Завантажити" Click="LoadButton_Click" Width="100" Margin="5"/>
         </StackPanel>
     </Grid>
 </Window>

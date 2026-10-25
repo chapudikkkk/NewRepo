@@ -84,5 +84,54 @@ namespace lab5
             await _catalog.LoadAsync();
             MessageBox.Show("Каталог успішно завантажено.", "Завантаження", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            _catalog.SearchStudents(SearchTextBox.Text);
+        }
+
+        private void UniqueSchoolsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var schools = _catalog.GetUniqueSchools();
+
+            if (schools.Count == 0)
+            {
+                MessageBox.Show("Каталог студентів порожній.");
+                return;
+            }
+
+            MessageBox.Show("Унікальні номери шкіл:\n" + string.Join(", ", schools));
+        }
+
+        private void OldestStudentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            _catalog.FindThreeOldestStudents();
+        }
+
+        private void AverageYearButton_Click(object sender, RoutedEventArgs e)
+        {
+            double averageYear = _catalog.CalculateAverageBirthYear();
+
+            if (_catalog.Students.Count == 0)
+            {
+                MessageBox.Show("Каталог студентів порожній.");
+                return;
+            }
+
+            MessageBox.Show(
+                $"Середній рік народження: {averageYear:F2}");
+        }
+
+        private void GroupStudentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            string fullName = _catalog.FindLongestFullName();
+            MessageBox.Show(fullName, "Студент з найдовшим ПІБ");
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTextBox.Clear();
+            _catalog.ResetFilter();
+        }
     }
 }
