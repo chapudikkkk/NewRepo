@@ -113,6 +113,16 @@ namespace lab5
             return _allStudents.Average(s => s.BirthYear);
         }
 
+        public int MaxSchoolNumber()
+        {
+            if (_allStudents.Count == 0)
+            {
+                return 0;
+            }
+
+            return _allStudents.Max(s => s.School);
+        }
+
         public string FindLongestFullName()
         {
             if (_allStudents.Count == 0)

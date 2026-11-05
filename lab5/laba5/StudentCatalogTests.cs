@@ -187,6 +187,18 @@ public class StudentCatalogTests
         Assert.AreEqual(0.0, result);
     }
 
+
+    [TestMethod]
+    public void CalculateMaxSchoolNumber()
+    {
+        var catalog = new StudentCatalog(_fileSaver, _fileLoader, _testFilePath);
+        catalog.AddStudent(new Student("Анна Коваль", 2004, 10, "1"));
+        catalog.AddStudent(new Student("Олександр Шевченко", 2003, 12, "2"));
+        catalog.AddStudent(new Student("Іван Петренко", 2005, 15, "3"));
+        int result = catalog.MaxSchoolNumber();
+        Assert.AreEqual(15, result);
+    }
+
     [TestMethod]
     public void FindLongestFullName()
     {

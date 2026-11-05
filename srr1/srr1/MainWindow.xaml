@@ -1,0 +1,36 @@
+﻿<Window x:Class="srr1.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Міський автопаркінг" Height="700" Width="1100" WindowStartupLocation="CenterScreen" Background="#F3F5F9">
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,22">
+            <TextBlock Text="Міський автопаркінг" FontSize="28" FontWeight="Bold" Foreground="#243B5A"/>
+            <TextBlock Text="Керування паркувальними зонами, оплатами та штрафами" FontSize="14" Foreground="#718096" Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="White" CornerRadius="10" Padding="15" Margin="0,0,0,18">
+            <StackPanel>
+                <WrapPanel VerticalAlignment="Center" Margin="0,0,0,12">
+                    <Button x:Name="ShowDataButton" Content="Показати дані" Width="140" Height="38" Background="#E8EEF6" Foreground="#315B91" BorderThickness="0" FontWeight="SemiBold" Cursor="Hand" Margin="0,0,20,0" Click="ShowDataButton_Click"/>
+                    <TextBlock Text="Мінімальна сума платежів:" VerticalAlignment="Center" Foreground="#45556B" Margin="0,0,10,0"/>
+                    <TextBox x:Name="MinAmountTextBox" Width="120" Height="34" VerticalContentAlignment="Center" Padding="8,0" BorderBrush="#D5DDE8" BorderThickness="1" Margin="0,0,10,0"/>
+                    <Button x:Name="FilterButton" Content="Фільтрувати" Width="120" Height="38" Background="#3B806B" Foreground="White" BorderThickness="0" FontWeight="SemiBold" Cursor="Hand" Click="FilterButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Button x:Name="PaymentStatisticsButton" Content="Способи оплати" Width="160" Height="36" Background="#E8EEF6" Foreground="#315B91" BorderThickness="0" FontWeight="SemiBold" Cursor="Hand" Margin="0,0,10,0" Click="PaymentStatisticsButton_Click"/>
+                    <Button x:Name="ZoneStatisticsButton" Content="Дохід за зонами" Width="160" Height="36" Background="#E8EEF6" Foreground="#315B91" BorderThickness="0" FontWeight="SemiBold" Cursor="Hand" Margin="0,0,10,0" Click="ZoneStatisticsButton_Click"/>
+                    <Button x:Name="AnomaliesButton" Content="Пошук аномалій" Width="160" Height="36" Background="#F8EAEA" Foreground="#A33D3D" BorderThickness="0" FontWeight="SemiBold" Cursor="Hand" Margin="0,0,10,0" Click="AnomaliesButton_Click"/>
+                    <Button x:Name="PenaltyStatisticsButton" Content="Штрафи" Width="120" Height="36" Background="#F8EAEA" Foreground="#A33D3D" BorderThickness="0" FontWeight="SemiBold" Cursor="Hand" Click="PenaltyStatisticsButton_Click"/>
+                </WrapPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Background="White" CornerRadius="10" Padding="12">
+            <DataGrid x:Name="ParkingDataGrid" AutoGenerateColumns="True" IsReadOnly="True" CanUserAddRows="False" AutoGeneratingColumn="ParkingDataGrid_AutoGeneratingColumn"/>
+        </Border>
+    </Grid>
+</Window>
