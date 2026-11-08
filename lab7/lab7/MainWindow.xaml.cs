@@ -20,13 +20,13 @@ namespace lab7
         private OilCompany oilCompany;
         private InsuranceCompany insuranceCompany;
         private TradingBot tradingBot;
+        private bool isDecreasing = false;
 
         public MainWindow()
         {
             InitializeComponent();
 
             exchange = new StockExchange(75);
-
             oilCompany = new OilCompany();
             insuranceCompany = new InsuranceCompany();
             tradingBot = new TradingBot();
@@ -81,6 +81,32 @@ namespace lab7
 
             logListBox.ScrollIntoView(
                 logListBox.Items[logListBox.Items.Count - 1]);
+        }
+
+        private async void btnDecreasePrice_Click(object sender, RoutedEventArgs e)
+        {
+            if (isDecreasing)
+                return;
+
+            isDecreasing = true;
+            btnDecreasePrice.IsEnabled = false;
+
+            while (exchange.OilPrice > 50)
+            {
+                double newPrice = exchange.OilPrice - 5;
+
+                if (newPrice < 50)
+                    newPrice = 50;
+
+                exchange.ChangePrice(newPrice);
+
+                await Task.Delay(1000);
+            }
+
+            LogMessage("Досягнуто мінімальної ціни нафти.");
+
+            isDecreasing = false;
+            btnDecreasePrice.IsEnabled = true;
         }
     }
 }
